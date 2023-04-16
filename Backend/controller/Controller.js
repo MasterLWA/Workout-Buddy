@@ -1,5 +1,6 @@
-const { MongoDriverError } = require('mongodb');
+const { MongoDriverError, MongoServerClosedError } = require('mongodb');
 const Workout = require('../Models/workoutModel');
+const { default: mongoose, Mongoose } = require('mongoose');
 
 //get all workouts
 const getWorkouts = async (req, res) => {
@@ -13,14 +14,17 @@ const getWorkouts = async (req, res) => {
 const getWorkoutById = async (req, res) => {
     const {id} = req.params
 
-    if (!MongoDriverError.isValidObjectId(id)){
-        return res.status(200).json({error:'invalid id'})
+    //check for valid id
+    if (!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(404).json({error:'invalid id'})
     }
+
 
     const workout = await Workout.findById(id)
 
+    //if workout not found
     if(!workout){
-        return res.status(200).json({error:'workout not found'})
+        return res.status(400).json({error:'workout not found'})
     }
 
     res.status(200).json(workout)
@@ -46,9 +50,55 @@ const createWorkout = async (req, res) => {
 
 
 //update workout
+const updateWorkout = async (req, res) => {
+
+    const {id} = req.params
+
+    //check for valid id
+    if (!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(404).json({error:'invalid id'})
+    }
+
+    //check for existing workout
+    const workout = await Workout.findOneAndUpdate({_id: id},
+        {
+            ...req.body
+        } )
+
+
+    //if workout not found
+    if(!workout){
+        return res.status(400).json({error:'workout not found'})
+    }
+
+    //return updated workout
+    res.status(200).json(workout)
+}
 
 
 //delete workout
+const deleteWorkout = async (req, res) => {
+    
+    const {id} = req.params
+
+    //check for valid id
+    if (!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(404).json({error:'invalid id'})
+    }
+
+    //check for existing workout
+    const workout = await Workout.findByIdAndDelete({_id:id})
+
+    //if workout not found
+    if(!workout){
+        return res.status(400).json({error:'workout not found'})
+    }
+
+    //return deleted workout
+    res.status(200).json(workout)
+}    
+
+//export functions
 module .exports = {
-    createWorkout, getWorkoutById, getWorkouts
+    createWorkout, getWorkoutById, getWorkouts, deleteWorkout, updateWorkout
 }
