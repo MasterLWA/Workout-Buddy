@@ -5,8 +5,8 @@ const Navbar = () => {
     <header>
      
      <div className="container-fluid" id="navbar">
-        <Link to="/">
-            <h1>Workout Buddy</h1>
+        <Link to="/" className="container">
+            <h3>Workout Buddy</h3>
         </Link>
      </div>
 

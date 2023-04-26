@@ -1,28 +1,63 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    background-color: #f2f2f2;
 }
 
 #navbar{
-  background-color: lavender; 
-  color: black;
-  padding: 10px;
-  font-size: 20px;
-  font-weight: bold;
-  text-align: center;
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    padding: 1px;
+    width: 100%;
+    z-index: 100;
+  }
+
+#navbar a{
+    color: #ffffff;
+    text-decoration: none;
+}
+
+#navbar h3{
+    padding-left: 50px;
+}
+
+#workoutlist{
+  border-radius: 40px;
+  background-color: bisque;
+  padding: 40px;
+  margin: 20px;
+  width:400px;
+}
+
+#workoutform h3{
 
 }
 
-Link{
-  text-decoration: none;
-  color: #ffffff;
+#workoutform{
+  border-radius: 40px;
+  background-color: bisque;
+  padding: 40px;
+  margin: 20px;
+  width:400px;
+}
+
+#workoutform input{
+  margin: 10px;
+  padding: 10px;
+  width: 280px;
+  border-radius: 10px;
+}
+
+#workoutform button{
+  margin: 10px;
+  padding: 10px;
+  width: 200px;
+  border-radius: 10px;
 }
